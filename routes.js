@@ -1,4 +1,4 @@
-const router = require('express').Router;
+const router = require('express').Router();
 const User = require('./models/user');
 
 router.post('/', async (req, res) => {
@@ -28,3 +28,5 @@ router.post('/', async (req, res) => {
 		return res.json({message: "ok", token: token});
 	});
 });
+
+module.exports = router;

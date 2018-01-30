@@ -11,6 +11,7 @@ const express       = require('express')
   , ExtractJwt      = require('passport-jwt').ExtractJwt
 	, jwt							= require('jsonwebtoken')
 	, router					= require('./routes')
+	, mongoose        = require('mongoose')
 ;
 
 const User = require('./models/user');
@@ -40,21 +41,23 @@ passport.use(new JWTStrategy(jwtOptions, async (payload, next) => {
 }));
 
 app.use(passport.initialize());
-app.use(express.static(__dirname + '/public/'));
-
 /*
  * Boilerplate code end
  *
 */
 
+const webpack = require('webpack');
 const middleware = require('webpack-dev-middleware');
 const complier = webpack(require('./webpack.config'));
+const path = require('path');
 
 app.use(middleware(complier, {
   publicPath: '/'
 }));
-app.use('/', routes);
-app.get('*', (req, res) => res.sendFile('./index.html'));
 
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'dist', 'index.html')));
+app.use('/', router);
 
 app.listen(process.env.PORT || 3000);
