@@ -1,7 +1,13 @@
 const router = require('express').Router();
 const User = require('./models/user');
+const jwt = require('jsonwebtoken');
 
-router.post('/', async (req, res) => {
+const jwtOptions = {
+	secretOrKey: process.env.SECRET || 'keyboardcat'
+};
+
+router.post('/login', async (req, res) => {
+	console.log('request received', req.body);
 	let name, password;
 	if(req.body.name && req.body.password){
 		name = req.body.name;
