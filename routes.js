@@ -7,13 +7,13 @@ const jwtOptions = {
 };
 
 router.post('/login', async (req, res) => {
-	console.log('request received', req.body);
+	// console.log('request received', req.body);
 	let name, password;
 	if(req.body.name && req.body.password){
 		name = req.body.name;
 		password = req.body.password;
 	} else {
-		return res.status(401).json({message:"Username or password not supplied"});
+		return res.json({message:"Username or password not supplied"});
 	}
 	let user;
 	try {
@@ -22,7 +22,7 @@ router.post('/login', async (req, res) => {
 		console.error(err);
 	}
 	if( ! user ){
-		return res.status(401).json({message:"No such user found"});
+		return res.json({message:"No such user found"});
 	}
 	
 	user.authenticate(password, (err1, user, err2) => {

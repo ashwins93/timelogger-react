@@ -16,7 +16,7 @@ const express       = require('express')
 
 const User = require('./models/user');
 
-mongoose.connect(process.env.DBURL  || "mongodb://localhost:27017/timelogs");
+mongoose.connect(process.env.DBURL  || "mongodb://localhost:27017/timelogs", { useMongoClient: true });
 mongoose.Promise = Promise;
 //mongoose.set('debug', true);
 require('dotenv').config();
@@ -55,9 +55,9 @@ app.use(middleware(complier, {
   publicPath: '/'
 }));
 
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'dist', 'index.html')));
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 app.use('/api', router);
 
 app.listen(process.env.PORT || 3000);

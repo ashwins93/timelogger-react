@@ -45,5 +45,8 @@
       "react",
       "stage-0"
     ]
+  },
+  "nodemonConfig": {
+    "ignore": ["src/*"]
   }
 }
