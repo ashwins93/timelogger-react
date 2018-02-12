@@ -55,9 +55,11 @@ app.use(middleware(complier, {
   publicPath: '/'
 }));
 
+app.use('/api', router);
+
 app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
-app.use('/api', router);
+
 
 app.listen(process.env.PORT || 3000);

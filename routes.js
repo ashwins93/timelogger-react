@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('./models/user');
 const jwt = require('jsonwebtoken');
+const Log = require('./models/log');
 
 const jwtOptions = {
 	secretOrKey: process.env.SECRET || 'keyboardcat'
@@ -33,6 +34,19 @@ router.post('/login', async (req, res) => {
 		const token = jwt.sign(payload, jwtOptions.secretOrKey);
 		return res.json({message: "ok", token: token});
 	});
+});
+
+router.get('/time', async (req, res) => {
+  const { name } = req.query;
+  let user;
+  try {
+    user = await User.findByUsername(name).populate('logins').exec();
+  } catch (err) {
+    console.log(err);
+  }
+  logs = user.logins.map(log => log.time );
+  
+  res.json({  logs: logs });
 });
 
 module.exports = router;
