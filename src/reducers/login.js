@@ -1,8 +1,13 @@
 import { combineReducers } from 'redux';
+import {
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+} from './actionTypes';
 
 const user = (state = null, action) => {
   switch(action.type) {
-    case 'LOGIN_SUCCESS':
+    case LOGIN_SUCCESS:
       return action.user;
     default:
       return state;
@@ -11,7 +16,7 @@ const user = (state = null, action) => {
 
 const token = (state = null, action) => {
   switch(action.type) {
-    case 'LOGIN_SUCCESS':
+    case LOGIN_SUCCESS:
       return action.token;
     default:
       return state;
@@ -20,10 +25,10 @@ const token = (state = null, action) => {
 
 const isWaiting = (state = false, action) => {
   switch(action.type) {
-    case 'LOGIN_REQUEST':
+    case LOGIN_REQUEST:
       return true;
-    case 'LOGIN_SUCCESS':
-    case 'LOGIN_FAIL':
+    case LOGIN_SUCCESS:
+    case LOGIN_FAIL:
       return false;
     default:
       return state;
