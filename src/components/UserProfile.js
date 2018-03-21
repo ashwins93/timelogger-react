@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
-//import PropTypes from 'prop-types';
-import axios from 'axios';
-import * as actions from '../actions'
 import { connect } from 'react-redux';
-import { 
-  getLogs, 
-  getIsLoading, 
+import PropTypes from 'prop-types';
+import axios from 'axios';
+import * as actions from '../actions';
+
+import {
+  getLogs,
+  getIsLoading,
   getToken,
   getUser,
 } from '../reducers';
 
-class UserProfile extends Component { 
-    
+class UserProfile extends Component {
   fetchData() {
-    const { 
+    const {
       match,
       fetchLogs,
     } = this.props;
-    
-    fetchLogs( match.params.user );
+
+    fetchLogs(match.params.user);
   }
-  
+
   componentDidMount() {
-   this.fetchData(); 
+    this.fetchData();
   }
-  
+
   render() {
     const {
       match,
@@ -35,34 +35,34 @@ class UserProfile extends Component {
     return (
       <div>
         <h1>Welcome { match.params.user }</h1>
-          {
-            isLoading ?
-            <p>Loading...</p> :            
+        {
+          isLoading ?
+            <p>Loading...</p> :
             <ul>
               {
                 logs ?
-                logs.map(log => <li key={log}>{ new Date(log).toLocaleString() }</li>) :
-                <li>error</li>
+                  logs.map(log => <li key={log}>{ new Date(log).toLocaleString() }</li>) :
+                  <li>error</li>
               }
             </ul>
-          }
+        }
       </div>
     );
   }
 }
-/* UserProfile.propTypes = {
-  user: PropTypes.string.isRequired,
-  token: PropTypes.string.isRequired,
-}; */
+UserProfile.propTypes = {
+  logs: PropTypes.array,
+  isLoading: PropTypes.boolean,
+};
 
-const mapStateToProps = ( state ) => ({
+const mapStateToProps = state => ({
   logs: getLogs(state),
   isLoading: getIsLoading(state),
   token: getToken(state),
   user: getUser(state),
 });
 
-export default connect( 
+export default connect(
   mapStateToProps,
-  actions
+  actions,
 )(UserProfile);

@@ -6,7 +6,7 @@ import {
 } from './actionTypes';
 
 const logs = (state = [], action) => {
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_LOGS_SUCCESS:
       return action.logs;
     default:
@@ -15,7 +15,7 @@ const logs = (state = [], action) => {
 };
 
 const isLoading = (state = false, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_LOGS_REQUEST:
       return true;
     case FETCH_LOGS_SUCCESS:
@@ -31,5 +31,5 @@ export default combineReducers({
   isLoading,
 });
 
-export const getLogs = ( state ) => state.logs;
-export const getIsLoading = ( state ) => state.isLoading;
+export const getLogs = state => state.logs;
+export const getIsLoading = state => state.isLoading;

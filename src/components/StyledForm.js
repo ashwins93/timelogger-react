@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-import Icon from 'material-ui/icon';
+import { Icon } from 'material-ui';
 import Typography from 'material-ui/Typography';
 import PropTypes from 'prop-types';
 import Card from 'material-ui/Card';
@@ -14,28 +14,28 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    padding: theme.spacing.unit * 4
-  },  
+    padding: theme.spacing.unit * 4,
+  },
   card: {
     maxWidth: 400,
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: '20vh'
+    marginTop: '20vh',
   },
   button: {
     flexGrow: 0,
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing.unit * 2,
   },
   textField: {
     minWidth: 300,
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
   },
   progress: {
-    width: '100%'
+    width: '100%',
   },
   error: {
-    marginTop: theme.spacing.unit
-  }
+    marginTop: theme.spacing.unit,
+  },
 });
 
 const StyledForm = ({
@@ -52,7 +52,7 @@ const StyledForm = ({
     <form className={ classes.container } onSubmit={handleSubmit}>
       <Typography type="headline">Login</Typography>
       <Typography type="subheading">to view your profile</Typography>
-      <TextField 
+      <TextField
         label="Username"
         value={username}
         placeholder="Enter your username"
@@ -60,7 +60,7 @@ const StyledForm = ({
         className={ classes.textField }
         onChange={ handleUserChange }
       />
-      <TextField 
+      <TextField
         label="Password"
         type="password"
         value={password}
@@ -85,13 +85,13 @@ const StyledForm = ({
         </Typography>
       }
     </form>
-    { 
-      isWaiting && 
+    {
+      isWaiting &&
       <div className={classes.progress}>
-        <LinearProgress  />
+        <LinearProgress />
       </div>
     }
-    
+
   </Card>
 );
 
@@ -102,6 +102,6 @@ StyledForm.propTypes = {
   handlePasswordChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   isWaiting: PropTypes.bool.isRequired,
-}
+};
 
 export default withStyles(styles)(StyledForm);

@@ -6,7 +6,7 @@ import {
 } from './actionTypes';
 
 const user = (state = null, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case LOGIN_SUCCESS:
       return action.user;
     default:
@@ -15,7 +15,7 @@ const user = (state = null, action) => {
 };
 
 const token = (state = null, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case LOGIN_SUCCESS:
       return action.token;
     default:
@@ -24,7 +24,7 @@ const token = (state = null, action) => {
 };
 
 const isWaiting = (state = false, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case LOGIN_REQUEST:
       return true;
     case LOGIN_SUCCESS:
@@ -33,14 +33,14 @@ const isWaiting = (state = false, action) => {
     default:
       return state;
   }
-}
+};
 
 const message = (state = null, action) => {
-  if(action.message) {
+  if (action.message) {
     return action.message;
   }
   return state;
-}
+};
 
 export default combineReducers({
   user,
@@ -49,7 +49,7 @@ export default combineReducers({
   message,
 });
 
-export const getIsWaiting = (state) => state.isWaiting;
-export const getUser = (state) => state.user;
-export const getToken = (state) => state.token;
-export const getMessage = (state) => state.message;
+export const getIsWaiting = state => state.isWaiting;
+export const getUser = state => state.user;
+export const getToken = state => state.token;
+export const getMessage = state => state.message;

@@ -5,27 +5,27 @@ import * as actions from '../actions';
 import StyledForm from './StyledForm';
 
 class LoginForm extends Component {
- state = {
+  state = {
     username: '',
-    password: ''
+    password: '',
   };
-  
+
   handleChange = name => event => (
     this.setState({
-      [name]: event.target.value
+      [name]: event.target.value,
     })
   );
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.authenticate(this.state.username, this.state.password); 
+    this.props.authenticate(this.state.username, this.state.password);
   }
 
   render() {
     const { message, isWaiting } = this.props;
 
     return (
-      <StyledForm 
+      <StyledForm
         username={ this.state.username }
         password={ this.state.password }
         handleUserChange={ this.handleChange('username') }
@@ -38,14 +38,12 @@ class LoginForm extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   message: getMessage(state),
   isWaiting: getIsWaiting(state),
 });
 
-
-
 export default connect(
   mapStateToProps,
-  actions
+  actions,
 )(LoginForm);

@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Reboot from 'material-ui/Reboot';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider, connect } from 'react-redux';
 import configureStore from './configureStore';
 import Entry from './components/Entry';
-import { Switch, Route } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
-import { connect } from 'react-redux';
 import { getToken, getUser } from './reducers';
 import UserProfile from './components/UserProfile';
 
@@ -22,4 +19,4 @@ const App = () => (
   </Provider>
 );
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, window.document.getElementById('root'));

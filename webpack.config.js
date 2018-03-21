@@ -5,18 +5,23 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
+    publicPath: '/',
   },
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      }
-    ]
-  }
+        use: ['babel-loader'],
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.js$/,
+        use: ['babel-loader', 'eslint-loader'],
+        exclude: /node_modules/,
+      },
+    ],
+  },
 };
